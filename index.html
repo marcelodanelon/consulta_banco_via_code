@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API Demo</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><b>Id</b></td>
+            <td><b>Nome</b></td>
+            <td><b>Email</b></td>
+            <td><b>Empresa</b></td>
+            <td><b>Cidade</b></td>
+            <td><b>Phone</b></td>
+        </tr>
+        <tbody id="lista-clientes"></tbody>
+    </table>
+    
+    <script src="jquery.js"></script>
+    <script>
+        $.ajax({
+            url: "json.php",
+            success: function(dados){
+                let clientes = JSON.parse(dados)
+                clientes.forEach(e => {
+                    $("#lista-clientes").append(`<tr><td>${e.id}</td>
+                                                     <td>${e.nome}</td>
+                                                     <td>${e.email}</td>
+                                                     <td>${e.empresa}</td>
+                                                     <td>${e.cidade}</td>
+                                                     <td>${e.phone}</td>`)
+                });
+            }     
+        });
+    </script>
+</body>
+</html>

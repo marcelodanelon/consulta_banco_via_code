@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API Demo</title>
+</head>
+
+<body>
+    <img src="load.gif" style="display: none;" id="load">
+    <form>
+        Nome:<input id="nome"><br>
+        E-mail<input id="email"><br>
+        <button onclick="enviar()" type="button">Salvar</button>
+    </form>
+
+    <script src="jquery.js"></script>
+    <script>
+        function enviar() {
+            $.ajax({
+                url: "salvar.php",
+                data: {
+                    nome: $("#nome").val(),
+                    email: $("#email").val()
+                },
+                method: 'POST',
+                success: function (dados) {
+                    console.log(dados)
+                    $("#nome").val("")
+                    $("#email").val("")
+                    $("#load").hide();
+                },
+                beforeSend:function(){
+                    $("#load").show();
+                    console.log("enviado");
+
+                },
+                error:function(erro){
+                    console.log(erro);
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>
